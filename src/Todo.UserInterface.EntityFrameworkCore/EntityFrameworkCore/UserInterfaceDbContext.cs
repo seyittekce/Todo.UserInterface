@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Todo.GroupManagement.Entities;
+using Todo.GroupManagement.EntityFrameworkCore;
+using Todo.TaskManagement.Entities.Lists;
+using Todo.TaskManagement.EntityFrameworkCore;
 using Volo.Abp.AuditLogging.EntityFrameworkCore;
 using Volo.Abp.BackgroundJobs.EntityFrameworkCore;
 using Volo.Abp.Data;
@@ -18,29 +21,17 @@ namespace Todo.UserInterface.EntityFrameworkCore
 {
     [ReplaceDbContext(typeof(IIdentityDbContext))]
     [ReplaceDbContext(typeof(ITenantManagementDbContext))]
+    [ReplaceDbContext(typeof(ITaskManagementDbContext))]
+    [ReplaceDbContext(typeof(IGroupManagementDbContext))]
     [ConnectionStringName("Default")]
     public class UserInterfaceDbContext : 
         AbpDbContext<UserInterfaceDbContext>,
         IIdentityDbContext,
-        ITenantManagementDbContext
+        ITenantManagementDbContext,
+        ITaskManagementDbContext,
+        IGroupManagementDbContext
     {
-        /* Add DbSet properties for your Aggregate Roots / Entities here. */
-
         #region Entities from the modules
-
-        /* Notice: We only implemented IIdentityDbContext and ITenantManagementDbContext
-         * and replaced them for this DbContext. This allows you to perform JOIN
-         * queries for the entities of these modules over the repositories easily. You
-         * typically don't need that for other modules. But, if you need, you can
-         * implement the DbContext interface of the needed module and use ReplaceDbContext
-         * attribute just like IIdentityDbContext and ITenantManagementDbContext.
-         *
-         * More info: Replacing a DbContext of a module ensures that the related module
-         * uses this DbContext on runtime. Otherwise, it will use its own DbContext class.
-         */
-        public DbSet<Group> Groups { get; set; }
-        public DbSet<GroupUser> GroupUsers { get; set; }
-
         //Identity
         public DbSet<IdentityUser> Users { get; set; }
         public DbSet<IdentityRole> Roles { get; set; }
@@ -52,9 +43,11 @@ namespace Todo.UserInterface.EntityFrameworkCore
         // Tenant Management
         public DbSet<Tenant> Tenants { get; set; }
         public DbSet<TenantConnectionString> TenantConnectionStrings { get; set; }
-
+        public DbSet<Group> Groups { get; set; }
+        public DbSet<GroupUser> GroupUsers { get; set; }
+        public DbSet<TdList> TdList { get; set; }
         #endregion
-        
+
         public UserInterfaceDbContext(DbContextOptions<UserInterfaceDbContext> options)
             : base(options)
         {
@@ -85,5 +78,7 @@ namespace Todo.UserInterface.EntityFrameworkCore
             //    //...
             //});
         }
+
+ 
     }
 }

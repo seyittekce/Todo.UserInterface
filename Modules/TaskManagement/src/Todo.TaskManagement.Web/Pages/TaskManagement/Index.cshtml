@@ -2,8 +2,56 @@
 @using Microsoft.Extensions.Localization
 @using Todo.TaskManagement.Localization
 @model Todo.TaskManagement.Web.Pages.TaskManagement.IndexModel
-@inject IStringLocalizer<TaskManagementResource> L
-@{
+@section scripts{
+
+
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        var page = {
+            createListModal: new abp.ModalManager(abp.appPath + 'TaskManagement/Lists/CreateList'),
+            getList: function() {
+                todo.taskManagement.lists.tdList.getList(999).then(x => {
+                    $.each(x.items,
+                        function(i, items) {
+                            $("#sortable").append("<li class='ui-state-default list-group-item-action list-group-item d-flex justify-content-between align-items-center text-right' data-list='" + items.id + "'><i class='" + items.icon + " float-left'> </i>" + items.name + "</li>");
+                        });
+                });
+            },
+            listOnClick: function() {
+                $(document).on("click",
+                    "[data-list]",
+                    function() {
+                        $("[data-list]").removeClass("active")
+                        $(this).addClass("active");
+
+                    });
+            },
+            createListModalOnResult: function() {
+                page.createListModal.onResult(function() {
+                    $('[data-list]').remove();
+                    getList();
+                    abp.notify.success(
+                        'Yeni Liste Oluşturuldu',
+                        'Başarıyla yeni liste oluşturuldu'
+                    );
+                });
+            },
+            makeSortable: function() {
+                $("#sortable").sortable({
+                    items: "li:not(.ui-state-disabled)"
+                });
+            }
+        }
+        page.getList();
+        page.createListModalOnResult();
+        page.makeSortable();
+        page.listOnClick();
+    </script>
 }
-<h1>TaskManagement</h1>
-<p>@L["SamplePageMessage"]</p>
+<div class="row">
+    <div class="col-sm-3">
+        <ul id="sortable" class="list-group">
+            <li class="ui-state-disabled list-group-item list-group-item-action d-flex justify-content-between align-items-center text-right"  onclick="page.createListModal.open()" ><span class="fa fa-plus float-left"></span>Yeni Liste Oluştur</li>
+        </ul>
+    </div>
+</div>

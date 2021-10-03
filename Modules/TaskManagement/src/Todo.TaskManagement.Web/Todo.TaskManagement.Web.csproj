@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\GroupManagement\src\Todo.GroupManagement.Web\Todo.GroupManagement.Web.csproj" />
+    <ProjectReference Include="..\Todo.TaskManagement.Domain\Todo.TaskManagement.Domain.csproj" />
     <ProjectReference Include="..\Todo.TaskManagement.HttpApi\Todo.TaskManagement.HttpApi.csproj" />
   </ItemGroup>
 

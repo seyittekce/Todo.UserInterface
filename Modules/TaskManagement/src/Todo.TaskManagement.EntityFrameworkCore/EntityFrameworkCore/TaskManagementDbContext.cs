@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Todo.TaskManagement.Entities.Lists;
 using Volo.Abp.Data;
 using Volo.Abp.EntityFrameworkCore;
 
@@ -11,6 +12,7 @@ namespace Todo.TaskManagement.EntityFrameworkCore
          * public DbSet<Question> Questions { get; set; }
          */
 
+        public DbSet<TdList> TdList { get; set; }
         public TaskManagementDbContext(DbContextOptions<TaskManagementDbContext> options) 
             : base(options)
         {

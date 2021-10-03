@@ -38,6 +38,7 @@ using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.VirtualFileSystem;
 using Todo.GroupManagement;
+using Todo.TaskManagement;
 using Todo.TaskManagement.Web;
 
 namespace Todo.UserInterface.Web
@@ -184,6 +185,7 @@ namespace Todo.UserInterface.Web
             {
                 options.ConventionalControllers.Create(typeof(UserInterfaceApplicationModule).Assembly);
                 options.ConventionalControllers.Create(typeof(GroupManagementApplicationModule).Assembly);
+                options.ConventionalControllers.Create(typeof(TaskManagementApplicationModule).Assembly);
             });
         }
 

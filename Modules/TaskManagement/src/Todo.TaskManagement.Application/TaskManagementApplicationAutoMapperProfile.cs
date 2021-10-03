@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Todo.TaskManagement.Lists;
 
 namespace Todo.TaskManagement
 {
@@ -6,9 +7,9 @@ namespace Todo.TaskManagement
     {
         public TaskManagementApplicationAutoMapperProfile()
         {
-            /* You can configure your AutoMapper mapping configuration here.
-             * Alternatively, you can split your mapping configurations
-             * into multiple profile classes for a better organization. */
+            CreateMap<Entities.Lists.TdList, TdListDto>();
+            CreateMap<TdListDto, CreateUpdateTdListDto>();
+            CreateMap<CreateUpdateTdListDto, Entities.Lists.TdList>(MemberList.Source);
         }
     }
 }
