@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Todo.GroupManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Group\**" />
+    <EmbeddedResource Remove="Group\**" />
+    <None Remove="Group\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.AutoMapper" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.Ddd.Application" Version="4.4.3" />
+    <PackageReference Include="Volo.Abp.Identity.Domain" Version="4.4.3" />
+    <ProjectReference Include="..\Todo.GroupManagement.Application.Contracts\Todo.GroupManagement.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Todo.GroupManagement.Domain\Todo.GroupManagement.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

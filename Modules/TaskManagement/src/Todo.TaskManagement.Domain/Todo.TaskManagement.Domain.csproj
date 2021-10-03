@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Todo.TaskManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Ddd.Domain" Version="4.4.3" />
+    <ProjectReference Include="..\..\..\GroupManagement\src\Todo.GroupManagement.Domain\Todo.GroupManagement.Domain.csproj" />
+    <ProjectReference Include="..\Todo.TaskManagement.Domain.Shared\Todo.TaskManagement.Domain.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\" />
+  </ItemGroup>
+
+</Project>

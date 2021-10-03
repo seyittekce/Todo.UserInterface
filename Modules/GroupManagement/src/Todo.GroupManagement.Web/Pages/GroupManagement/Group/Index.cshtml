@@ -1,0 +1,101 @@
+﻿@page
+@model Todo.GroupManagement.Web.Pages.GroupManagement.Group.IndexModel
+@section scripts{
+    <script>
+        $(function() {
+            var createModal = new abp.ModalManager(abp.appPath + 'GroupManagement/Group/Create');
+            var updateModal = new abp.ModalManager(abp.appPath + 'GroupManagement/Group/Update');
+            var userAdd = new abp.ModalManager(abp.appPath + 'GroupManagement/Group/AddUserToGroup');
+            var dataTable = $('#GroupTable').DataTable(
+                abp.libs.datatables.normalizeConfiguration({
+                    serverSide: true,
+                    paging: true,
+                    order: [[1, "asc"]],
+                    searching: false,
+                    scrollX: true,
+                    loading: true,
+                    ajax: abp.libs.datatables.createAjax(todo.groupManagement.group.getList),
+                    columnDefs: [
+                        {
+                            title: "Grup Adı",
+                            data: "name"
+                        },
+                        {
+                            title: "Açıklama",
+                            data: "description",
+
+                        },
+                        {
+                            title: 'Aksiyonlar',
+                            rowAction: {
+                                items:
+                                [
+                                    {
+                                        text:"Düzenle",
+
+                                        action: function(data) {
+                                            updateModal.open({ groupId: data.record.id });
+                                        }
+                                        },
+                                        {
+                                            text: "Kullanıcı Ekle",
+
+                                            action: function (data) {
+                                                userAdd.open({ groupId: data.record.id });
+                                            }
+                                        },
+                                    {
+                                       text:"Sil",
+                                        confirmMessage: function(data) {
+                                            return data.name + " adlı grubu silmek istediğinze emin misiniz ? ";
+                                        },
+                                        action: function(data) {
+                                            todo.groupManagement.group
+                                                .delete(data.record.id)
+                                                .then(function() {
+                                                    abp.notify.info(
+                                                        "Başarıyla Silindi"
+                                                    );
+                                                    dataTable.ajax.reload();
+                                                });
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                })
+            );
+            createModal.onResult(function() {
+                dataTable.ajax.reload();
+            });
+            updateModal.onResult(function() {
+                dataTable.ajax.reload();
+            });
+            $('#newGroup').click(function(e) {
+                e.preventDefault();
+                createModal.open();
+            });
+        });
+    </script>
+}
+
+
+<abp-card>
+    <abp-card-header>
+        <abp-row>
+            <abp-column size-md="_6">
+                <abp-card-title>Gruplar</abp-card-title>
+            </abp-column>
+            <abp-column size-md="_6" class="text-right">
+                <abp-button id="newGroup"
+                            text="Yeni Grup Oluştur"
+                            icon="plus"
+                            button-type="Primary" />
+            </abp-column>
+        </abp-row>
+    </abp-card-header>
+    <abp-card-body>
+        <abp-table striped-rows="true" id="GroupTable"></abp-table>
+    </abp-card-body>
+</abp-card>

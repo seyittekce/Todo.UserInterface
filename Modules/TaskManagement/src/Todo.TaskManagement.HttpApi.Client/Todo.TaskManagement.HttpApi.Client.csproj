@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Import Project="..\..\common.props" />
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Todo.TaskManagement</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Volo.Abp.Http.Client" Version="4.4.3" />
+    <ProjectReference Include="..\..\..\GroupManagement\src\Todo.GroupManagement.HttpApi.Client\Todo.GroupManagement.HttpApi.Client.csproj" />
+    <ProjectReference Include="..\Todo.TaskManagement.Application.Contracts\Todo.TaskManagement.Application.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
