@@ -8,8 +8,8 @@ namespace Todo.TaskManagement
         public TaskManagementApplicationAutoMapperProfile()
         {
             CreateMap<Entities.Lists.TdList, TdListDto>();
-            CreateMap<TdListDto, CreateUpdateTdListDto>();
-            CreateMap<CreateUpdateTdListDto, Entities.Lists.TdList>(MemberList.Source);
+            CreateMap<TdListDto, CreateUpdateTdTasksDto>();
+            CreateMap<CreateUpdateTdTasksDto, Entities.Lists.TdList>(MemberList.Source);
         }
     }
 }

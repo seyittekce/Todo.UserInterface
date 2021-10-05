@@ -10,7 +10,7 @@ namespace Todo.TaskManagement.Web.Pages.TaskManagement.Lists
     public class CreateListModel : TaskManagementPageModel
     {
         [BindProperty]
-        public CreateUpdateTdListDto TdList { get; set; } = new();
+        public CreateUpdateTdTasksDto TdList { get; set; } = new();
         private readonly ITdListAppService _tdListAppService;
         public CreateListModel(ITdListAppService tdListAppService)
         {

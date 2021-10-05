@@ -1,4 +1,16 @@
 ﻿@page
+@using Volo.Abp.AspNetCore.Mvc.UI.Bootstrap.TagHelpers.Modal
 @model Todo.TaskManagement.Web.Pages.TaskManagement.Lists.UpdateModel
 @{
+    Layout = null;
+
 }
+<abp-dynamic-form abp-model="TdList" asp-page="/TaskManagement/Lists/Update">
+    <abp-modal>
+        <abp-modal-header title="@Model.TdList.Name Adlı Listeyi Düzenle"></abp-modal-header>
+        <abp-modal-body>
+            <abp-form-content />
+        </abp-modal-body>
+        <abp-modal-footer buttons="@(AbpModalButtons.Cancel|AbpModalButtons.Save)"></abp-modal-footer>
+    </abp-modal>
+</abp-dynamic-form>

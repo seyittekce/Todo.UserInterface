@@ -29,7 +29,7 @@
             createListModalOnResult: function() {
                 page.createListModal.onResult(function() {
                     $('[data-list]').remove();
-                    getList();
+                    page.getList();
                     abp.notify.success(
                         'Yeni Liste Oluşturuldu',
                         'Başarıyla yeni liste oluşturuldu'
@@ -54,4 +54,8 @@
             <li class="ui-state-disabled list-group-item list-group-item-action d-flex justify-content-between align-items-center text-right"  onclick="page.createListModal.open()" ><span class="fa fa-plus float-left"></span>Yeni Liste Oluştur</li>
         </ul>
     </div>
+    <div class="col-sm-6">
+        <div class=""></div>
+    </div>
+    <div class="col-sm-3"></div>
 </div>

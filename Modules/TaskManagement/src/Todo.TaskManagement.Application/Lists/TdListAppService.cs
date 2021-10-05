@@ -7,7 +7,7 @@ using Volo.Abp.Application.Services;
 using Volo.Abp.Domain.Repositories;
 namespace Todo.TaskManagement.Lists
 {
-    public class TdListAppService : CrudAppService<Entities.Lists.TdList, TdListDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateTdListDto, CreateUpdateTdListDto>, ITdListAppService
+    public class TdListAppService : CrudAppService<Entities.Lists.TdList, TdListDto, Guid, PagedAndSortedResultRequestDto, CreateUpdateTdTasksDto, CreateUpdateTdTasksDto>, ITdListAppService
     {
         private IRepository<TdList> _tdListRepository;
         public TdListAppService(IRepository<TdList, Guid> repository, IRepository<TdList> tdListRepository) : base(repository)

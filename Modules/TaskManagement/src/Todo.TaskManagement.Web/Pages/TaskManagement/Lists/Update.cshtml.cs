@@ -11,23 +11,24 @@ namespace Todo.TaskManagement.Web.Pages.TaskManagement.Lists
         [HiddenInput]
         [BindProperty(SupportsGet = true)]
         public Guid Id { get; set; }
-        private readonly IGroupAppService _groupAppService;
-        public CreateUpdateTdListDto TdList { get; set; }
-        public UpdateModel(IGroupAppService groupAppService)
+        private readonly ITdListAppService _tdListAppService;
+
+        public UpdateModel(ITdListAppService tdListAppService)
         {
-            _groupAppService = groupAppService;
+            _tdListAppService = tdListAppService;
         }
+
+        public CreateUpdateTdTasksDto TdList { get; set; }
+      
 
         public async Task OnGetAsync(Guid listId)
         {
-           var list =await _groupAppService.GetAsync(listId);
+           var list =await _tdListAppService.GetAsync(listId);
            if (list!=null)
            {
-               
+               this.Id = list.Id;
+               this.TdList = ObjectMapper.Map<TdListDto, CreateUpdateTdTasksDto>(list);
            }
-
-
-
         }
     }
 }
